@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<!-- Développement : service cartographie ANCT -->
+
+    <meta charset="utf-8" />
+    <title>DI</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="shortcut icon" type="image/png" href="img/picto_favicon.png"/>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Marianne">
+	<link rel="stylesheet" href="src/leaflet-search.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="src/leaflet-sidebar.css" />
+	<link rel="stylesheet" href="style.css" />
+	
+</head>
+	
+
+
+<body>
+	
+	<!-- Construction de panneau latéral -->
+    <div id="sidebar" class="sidebar collapsed">
+        
+		 <!-- Boutons de menu -->
+		<div class="sidebar-tabs" id="barre-verticale">
+            <ul role="tablist" >
+                <li><a href="#home" role="tab" id="logo" title="Retour à l'accueil" class="onglets"><i style="vertical-align:middle;" class="fa fa-home"></i></a></li>
+				<li><a role="tab" class="onglets" id="logo_dep" onclick="switchCD();" title="Conseils départementaux"><img src="img/picto_deptabblank.png"/></a></li>
+				<li><a role="tab" class="onglets" id="logo_epci" onclick="switchEPCI();" title="Intercommunalités"><img src="img/picto_epcitabblank.png"/></a></li>
+				<li><a role="tab" class="onglets" id="logo_com" onclick="switchCommunes();" title="Communes"><img src="img/picto_comtabblank.png"/></a></li>
+				<li><a href="data/Projets_DI_2018.ods" id="download" role="tab" target="_blank" title="Télécharger les données associées" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
+			</ul>
+        </div>
+
+        <!-- Contenu des onglets -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                
+				<h1>L'État dans les territoires
+				<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+				
+				<!-- Page d'accueil -->
+				<div class="panneau" id="accueil">
+					<div>
+						<h2>Répartition des dotations d'investissement de l'État en 2019</h2>
+						<p><span style="color:white;">1,921 milliard au titre de la DSIL</span> (dotation de soutien à l’investissement local), <span style="color:white;">de la DETR</span> (dotation d’équipement des territoires ruraux), <span style="color:white;">de la DPV</span> (dotation politique de la ville)<span style="color:white;"> et de la DSID</span> (dotation de soutien à l'investissement des départements).</p>
+						<p>L'État intervient en faveur du développement économique et social de tous les territoires. Il a subventionné directement <span style="color:white;">26&nbsp;718 projets</span> portés par les communes, leurs groupements (EPCI ey syndicats) et par les conseils départementaux de notre pays.</p>
+						<p>Le montant moyen de dotation atteint <span style="color:white;">28,58&nbsp;€ par habitant.</span></p>
+						<p>Pour les <span style="color:white;">projets subventionnés via la DETR, la  DSID et la DSID figurant sur la carte</span>, le soutien de l’État en faveur des communes, des intercommunalités et des conseils départementaux représente <span style="color:white;">23,43&nbsp;% </span>du coût total des projets. Il se répartit selon 8 grandes thématiques de la façon suivante&nbsp;:</p>
+						
+						<p><img src="img/picto_graphique.png" style="vertical-align:middle; width:95%;"/></p>
+						
+						<div class="button_container">
+							<button class="bouton_accueil" onclick="switchCD();" title="Explorer les projets dans les conseils départementaux"><img src="img/picto_onglet_off.png"/><div>Conseils départementaux</div></button>
+							<button class="bouton_accueil" onclick="switchEPCI();" title="Explorer les projets dans les intercommunalités"><img src="img/picto_onglet_off.png"/><div>Intercommunalités</div></button>
+							<button class="bouton_accueil" onclick="switchCommunes();" title="Explorer les projets dans les communes"><img src="img/picto_onglet_off.png"/><div>Communes</div></button>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Crédits -->
+				<div class="panneau" id="credits" style="width:70%;">
+						<p><i>Sources&nbsp;: <a href="http://www.dotations-dgcl.interieur.gouv.fr/consultation/accueil.php" target="_blank">Direction générale des collectivités locales (DGCL) </a>• Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">ANCT service cartographie</a> • <a href="data/Projets_DI_2018.ods" target="_blank">Télécharger les données</a></i></p>
+						<p><img src="img/logo_dgcl.png" style="vertical-align:middle; width:100%;"/></p>
+						<p><img src="img/logo_anct.png" style="vertical-align:middle; width:100%;"/></p>
+				</div>
+				
+				<!-- Panneau des conseils départementaux -->
+				<div class="panneau" id="panneauCD">
+					<div>
+						<h2>Répartition de la DSID dans les conseils départementaux en 2019</h2>
+						<p><span style="color:white;">175,79 millions au titre de la DSID</span> (dotation de soutien à l’investissement des départements).</p>
+						<p>Dans le cadre de montages contractuels, les conseils départementaux bénéficient parfois de façon exceptionnelle de la DSIL. Cela a concerné 8 projets en 2019 pour une subvention de 8,47 millions.</p>
+						<p>L'État a subventionné directement <span style="color:white;">357 projets</span> portés par <span style="color:white;">99 conseils départementaux</span> de notre pays.</p>
+						<p>Le soutien de l’État représente <span style="color:white;">23,37&nbsp;%</span> du coût total des projets. Il se répartit selon 7 grandes thématiques de la façon suivante&nbsp;:</p>
+						
+						<p><img src="img/picto_graphique_cd.png" style="vertical-align:middle; width:95%;"/></p>
+						
+						<div class="button_container">
+							<button class="bouton_accueil" onclick="switchEPCI();" title="Explorer les projets dans les intercommunalités"><img src="img/picto_onglet_off.png"/><div>Intercommunalités</div></button>
+							<button class="bouton_accueil" onclick="switchCommunes();" title="Explorer les projets dans les communes"><img src="img/picto_onglet_off.png"/><div>Communes</div></button>
+							<button class="bouton_accueil" onclick="retourAccueil;" title="Retourner à l'accueil"><img src="img/picto_onglet_off.png"/><div>Retour à l'accueil</div></button>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Panneau des epci -->
+				<div class="panneau" id="panneauEPCI">
+					<div>
+						<h2>Répartition de la DETR et de la DSIL dans les intercommunalités en 2019</h2>
+						<p><span style="color:white;">341,93 millions au titre de la DETR </span>(dotation d’équipement des territoires ruraux) et <span style="color:white;">de la DSIL</span> (dotation de soutien à l’investissement local).</p>
+						<p>L'État a subventionné directement <span style="color:white;">2&nbsp;440 projets</span> portés par <span style="color:white;">979 intercommunalités</span> de notre pays.</p>
+						<p>Le soutien de l’État représente <span style="color:white;">20,27&nbsp;%</span> du coût total des projets. Il se répartit selon 8 grandes thématiques de la façon suivante&nbsp;:</p>
+						
+						<p><img src="img/picto_graphique_epci.png" style="vertical-align:middle; width:95%;"/></p>
+						
+						<div class="button_container">
+							<button class="bouton_accueil" onclick="switchCommunes();" title="Explorer les projets dans les communes"><img src="img/picto_onglet_off.png"/><div>Communes</div></button>
+							<button class="bouton_accueil" onclick="switchCD();" title="Explorer les projets dans les conseils départementaux"><img src="img/picto_onglet_off.png"/><div>Conseils départementaux</div></button>
+							<button class="bouton_accueil" onclick="retourAccueil;" title="Retourner à l'accueil"><img src="img/picto_onglet_off.png"/><div>Retour à l'accueil</div></button>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Panneau des communes -->
+				<div class="panneau" id="panneauCommunes">
+					<div>
+						<h2>Répartition de la DETR et de la DSIL dans les communes en 2019</h2>
+						<p><span style="color:white;">1,181 milliard au titre de la DSIL</span> (dotation de soutien à l’investissement local) et <span style="color:white;">de la DETR</span> (dotation d’équipement des territoires ruraux).</p>
+						<p>L'État a subventionné directement <span style="color:white;">22&nbsp;014 projets</span> portés par <span style="color:white;">15&nbsp;422 communes</span> de notre pays. </p>
+						<p>Le soutien de l’État représente <span style="color:white;">24,55&nbsp;%</span> du coût total des projets. Il se répartit selon 8 grandes thématiques de la façon suivante&nbsp;:</p>
+						
+						<p><img src="img/picto_graphique_com.png" style="vertical-align:middle; width:95%;"/></p>
+						
+						<div class="button_container">
+							<button class="bouton_accueil" onclick="switchEPCI();" title="Explorer les projets dans les intercommunalités"><img src="img/picto_onglet_off.png"/><div>Intercommunalités</div></button>
+							<button class="bouton_accueil" onclick="switchCD();" title="Explorer les projets dans les conseils départementaux"><img src="img/picto_onglet_off.png"/><div>Conseils départementaux</div></button>
+							<button class="bouton_accueil" onclick="retourAccueil;" title="Retourner à l'accueil"><img src="img/picto_onglet_off.png"/><div>Retour à l'accueil</div></button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="button_container, panneau" id="filtres">
+						<div class="bouton"><button class="bouton_off" onclick="creationProjets('tout');" title="toutes les catégories" id="CHECKtout" style="font-size:1em; padding-bottom:10px">Voir toutes les catégories</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="creationProjets('1')" title="Santé, sanitaire et social" id="CHECK1"><img id="picto1" src="img/picto_on1.png" style="width:20px; padding-right:10px;" />Santé, sanitaire et social</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="creationProjets('2')" title="Économie et emploi" id="CHECK2" ><img id="picto2" src="img/picto_on2.png" style="width:20px; padding-right:10px;" />Économie et emploi</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="creationProjets('3')" title="Environnement, transition énergétique et écologie" id="CHECK3" ><img id="picto3" src="img/picto_on3.png" style="width:20px; padding-right:10px;" />Environnement, transition énergétique et écologie</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="creationProjets('4')" title="Éducation" id="CHECK4" ><img id="picto4" src="img/picto_on4.png" style="width:20px; padding-right:10px;" />Éducation</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="creationProjets('5')" title="Actions et Services publics" id="CHECK5" ><img id="picto5" src="img/picto_on5.png" style="width:20px; padding-right:10px;" />Actions et Services publics</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="creationProjets('6')" title="Construction, habitat, urbanisme, transport et mise aux normes" id="CHECK6" ><img id="picto6" src="img/picto_on6.png" style="width:20px; padding-right:10px;" />Construction, habitat, urbanisme, patrimoine, transport</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="creationProjets('7')" title="Contrat de ruralité" id="CHECK7" ><img id="picto7" src="img/picto_on7.png" style="width:20px; padding-right:10px;" />Contrat de ruralité</button></div><br/>
+						<div><span style="font-size:0.8em;"><i>Rechercher une commune ou intercommunalité bénéficiaire&nbsp;:</i></span></div>
+						<div id="boiteRecherche"></div>
+						<div class="button_container">
+							<button class="bouton_accueil" onclick="retourDepartements();" title="Départements"><img src="img/picto_onglet_off.png"/><div>Voir les départements</div></button>
+						</div>
+				</div>
+				
+				<!-- Contenu de la fiche récapitulative des départements -->
+				<div  class="panneau" id="popupDEP">
+					<h2>Cliquer sur un département pour voir les infos et télécharger la carte</h2>
+					
+					<div class="divTable" id="tableDEP">
+						<div class="divTableCell" >
+							<div class="divTableRow"  id="NOMDEP"></div>
+							<div class="divTableRow" id="LIEN"></div>
+						</div>
+						<div class="divTableCell" >
+							<h3 class="divTableRow">Population en 2019&nbsp;:</h3>
+							<div class="divTableRow chiffre" id="POPDEP"></div>
+						</div>
+						<div class="divTableCell" >
+							<h3 class="divTableRow">Total des dotations d'investissement versées dans le département en 2019&nbsp;:</h3>
+							<div class="divTableRow chiffre" id="DIDEP"></div>
+						</div>
+						<div class="divTableCell" >
+							<h3 class="divTableRow">Dotations d'investissement par habitant&nbsp;:</h3>
+							<div class="divTableRow chiffre" id="DIHA"></div>
+						</div>
+						<div class="divTableCell" >
+							<h3 class="divTableRow">Nombre total de projets financés via la DSIL, la DSID, la DETR et la dotation politique de la ville en 2019 dans le département&nbsp;:</h3>
+							<div class="divTableRow chiffre" id="NB_PROJETS"></div>
+						</div>	
+					</div>
+				
+				</div>
+				
+				<!-- Contenu des fiches d'information des collectivités -->
+				<div  class="panneau" id="popupCOL">
+					
+					<div class="divTable" id="tableDEP">
+						<div class="divTableCell" >
+							<div class="divTableRow"  id="NOMCOL"></div>
+						</div>
+						<div class="divTableCell" >
+							<h3 class="divTableRow">Population en 2019&nbsp;:</h3>
+							<div class="divTableRow chiffre" id="POP19"></div>
+						</div>
+						<div class="divTableCell" >
+							<h3 class="divTableRow">Nombre de projets subventionnés en 2019&nbsp;:</h3>
+							<div class="divTableRow chiffre" id="NB_PROJETS_COL"></div>
+						</div>
+						<div class="divTableCell" >
+							<h3 class="divTableRow">Total des subventions (en €)&nbsp;:</h3>
+							<div class="divTableRow chiffre" id="DI_COL"></div>
+						</div>
+						<div class="divTableCell" >
+							<h3 class="divTableRow">Subvention par habitant (en €)&nbsp;:</h3>
+							<div class="divTableRow chiffre" id="DIHA_COL"></div>
+						</div>
+						<div class="divTableCell" >
+							<h3 class="divTableRow">Les projets subventionnés&nbsp;:</h3>
+							<div class="divTableRow chiffre" id="LISTE_PROJETS"></div>
+						</div>						
+					</div>
+				
+				</div>
+				
+				<!-- Contenu de la fiche d'information sur les projets -->
+				<div class="divTable, panneau" id="popupPROJET">
+					<div id="NOM_COL"></div>
+					<!--<div id="ECHELON"></div>-->
+					<div id="POPCOL19"></div>
+					<div class="divTableBody">
+						<div class="divTableCell">
+								<h3 class="divTableRow">Description du projet&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="DESCRIPTION"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Thématique de référence&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="CATEGORIE"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Type de dotation&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="DOTATION"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Coût total de l'opération&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="COUT"></div>
+								<h3 class="divTableRow">Montant de la subvention en 2019&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="SUBVENTION"></div>
+								<h3 class="divTableRow">Part de la subvention dans le coût total&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="LEVIER"></div>
+						</div>
+					</div>
+				</div>
+					
+            </div>
+
+        </div>
+    </div>
+
+	<!-- Bloc de la carte -->
+	<div id="mapid"></div>
+
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+	
+	<script src="src/leaflet-search.js"></script>
+    <script src="src/leaflet-sidebar.js"></script>
+	<script type="text/javascript"  src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
+	<script type="text/javascript" src="data/masque.js"></script>
+	<script type="text/javascript" src="data/dep_synthese.js"></script>
+	<script type="text/javascript" src="data/reg.js"></script>
+	<script type="text/javascript" src="data/di19_toutes-collectivites.js"></script>
+	<script type="text/javascript" src="data/cercles_drom.js"></script>
+	<script type="text/javascript" src="data/chef_lieu.js"></script>
+	<script type="text/javascript" src="data/projets_di19.js"></script>
+	
+	<script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+
+	
+    <script>
+			
+		// Création de la carte
+		var map = L.map('mapid', {maxZoom:11, minZoom:5 })
+		.setView([46.5, -1.8], 6);
+		map.zoomControl.setPosition('topright');
+		map.attributionControl.addAttribution('<a href="https://cartotheque.cget.gouv.fr/cartes" style="text-decoration:none;" target="_blank ">ANCT</a>');
+			
+		//Ajout du panneau latéral
+		var sidebar = L.control.sidebar('sidebar').addTo(map);
+		sidebar.open('home');
+		
+		
+/* COULEURS - STYLES - LEGENDE */
+		
+		//Images de légende
+		var imageBounds = [[51.9, -5.4],[49.8, 0.16]]; 
+		var legende = L.imageOverlay('img/picto_legende.png', imageBounds, {zIndex : '1000'} );
+		map.addLayer(legende);
+		var legende_cd = L.imageOverlay('img/picto_legende_cd.png', imageBounds, {zIndex : '1000'} );
+		var legende_epci = L.imageOverlay('img/picto_legende_epci.png', imageBounds, {zIndex : '1000'} );
+		var legende_com = L.imageOverlay('img/picto_legende_com.png', imageBounds, {zIndex : '1000'} );
+		
+		//Définition des pictos
+		var LeafIcon = L.Icon.extend({options: {}});
+		var pictoOFF1 = new LeafIcon({iconUrl: 'img/picto_off1.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF2 = new LeafIcon({iconUrl: 'img/picto_off2.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF3 = new LeafIcon({iconUrl: 'img/picto_off3.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF4 = new LeafIcon({iconUrl: 'img/picto_off4.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF5 = new LeafIcon({iconUrl: 'img/picto_off5.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF6 = new LeafIcon({iconUrl: 'img/picto_off6.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF7 = new LeafIcon({iconUrl: 'img/picto_off7.png', iconSize: [23,30], iconAnchor:[12,30]});
+		
+		
+		//Fonctions de définition des couleurs
+		function getColor1(d) { //Total des dotations par habitant
+			return 	d > 40 ? '#6864bb' : //élevé
+			d <= 20  ? '#f1e3f3' : //faible
+			d <= 40 ? '#a7a5d8' : //moyen
+			'grey' ;
+		}
+		
+		function getColor2(d) { //Nombre de projets portés dans la collectivité
+			return 	d > 4 ? '#DE3B33' : //élevé
+			d <= 2  ? '#FFAD99' : //faible
+			d <= 4 ? '#FF8071' : //moyen
+			'grey' ;
+		}
+		
+		//Style des polygones départements
+		function style1(feature) {
+			return {
+			fillColor: getColor1(feature.properties.total_dotation_hab),
+			weight: 0.8,
+			opacity: 1,
+			color: 'white',
+			fillOpacity: 1
+		};
+		}
+		
+		function style2(feature) {
+			return {
+			fillColor: getColor2(feature.properties.nb_projets),
+			weight: 0.8,
+			opacity: 1,
+			color: 'white',
+			fillOpacity: 1
+		};
+		}
+		
+		function style3(feature) {
+			return {
+			fillColor: getColor2(feature.properties.nb_projets),
+			weight: 0.1,
+			opacity: 1,
+			color: 'white',
+			fillOpacity: 1
+		};
+		}
+		
+		
+/* CREATION DES COUCHES */		
+		
+		//Niveaux d'affichage des couches
+		map.createPane('selection');
+		map.getPane('selection').style.zIndex = 600;
+		map.createPane('regions');
+		map.getPane('regions').style.zIndex = 500;
+		map.createPane('markers');
+		map.getPane('markers').style.zIndex = 550;
+		map.createPane('bigMarker');
+		map.getPane('bigMarker').style.zIndex = 580;
+		map.createPane('labels');
+		map.getPane('labels').style.zIndex = 610;
+		
+		//Couches du fond de carte
+		Cache = L.geoJSON(JS_masque, {color: "#9de0d4", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
+		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.5, opacity: 0.7, fillOpacity: 0}).addTo(map);
+		Contour_Regions = L.geoJSON(js_reg, {
+			style: {interactive: false, color: "#ffffff", weight: 1.5, opacity: 1, pane:'regions', fillOpacity: 0}
+		}).addTo(map);
+		
+		Fond_Regions = L.geoJSON(js_reg, {
+			style: {interactive: false, fillColor: "#FAFAFA", weight: 0, opacity: 1, fillOpacity: 1}
+		}).addTo(map);
+		
+		
+		//Création des labels
+		var createLabelIcon = function(labelClass,labelText){
+		return L.divIcon({ 
+		className: labelClass,
+		html: labelText
+		})
+		}
+		
+		//Label Regions
+		labelsReg = L.geoJSON(JS_chef_lieu, {
+				pointToLayer: function(feature, latlng) {
+					return L.marker(latlng,{icon:createLabelIcon("labelClassReg", feature.properties.libgeom),pane:'labels', interactive: false})
+				},
+				filter : function(feature, layer) {
+                return feature.properties.STATUT == "région";
+				}		
+		}).addTo(map)
+		
+		//Label Departements
+		labelsDep = L.geoJSON(JS_chef_lieu, {
+				pointToLayer: function(feature, latlng) {
+					return L.marker(latlng,{icon:createLabelIcon("labelClassDep", feature.properties.libgeom),pane:'labels', interactive: false})
+				},
+				filter : function(feature, layer) {
+                return feature.properties.STATUT == "département";
+				}		
+		})
+		
+		//Label Canton
+		labelsCan = L.geoJSON(JS_chef_lieu, {
+				pointToLayer: function(feature, latlng) {
+					return L.marker(latlng,{icon:createLabelIcon("labelClassCan", feature.properties.libgeom),pane:'labels', interactive: false})
+				},
+				filter : function(feature, layer) {
+                return feature.properties.STATUT == "sous-prefecture";
+				}		
+		})
+		
+		//Départements
+		departement = L.geoJSON(js_dep, {
+			style: style1,
+			onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo + ' (' + feature.properties.codgeo + ')', {className: 'Tooltips', direction: "center", sticky:true});
+					layer.on('click', function(e) {
+						popupDEP(feature.properties);
+						selectProjets(feature.properties.échelon, feature.properties.codgeo);
+						geoSelect(e.target._latlngs);	
+						});	
+					}
+		});
+		departement.addTo(map);
+		
+		//Conseils départementaux
+		cd = L.geoJSON(js_collectivites, {
+			style: style2,
+			filter : function(feature, layer) {
+                return feature.properties.layer == "conseil_departemental";
+				},	
+			onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo + ' (' + feature.properties.codgeo + ')', {className: 'Tooltips', direction: "center", sticky:true});
+					layer.on('click', function(e) {
+						popupCOL(feature.properties);
+						selectProjets(feature.properties.échelon, feature.properties.codgeo);
+						geoSelect(e.target._latlngs);
+						});	
+					}
+		});
+		
+		//Intercommunalités
+		epci = L.geoJSON(js_collectivites, {
+			style: style2,
+			filter : function(feature, layer) {
+                return feature.properties.layer == "epci";
+				},	
+			onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo + ' (' + feature.properties.codgeo + ')', {className: 'Tooltips', direction: "center", sticky:true});
+					layer.on('click', function(e) {
+						popupCOL(feature.properties);
+						selectProjets(feature.properties.échelon, feature.properties.codgeo);
+						geoSelect(e.target._latlngs);
+						});	
+					}
+		});
+		
+		//Communes
+		com = L.geoJSON(js_collectivites, {
+			style: style3,
+			filter : function(feature, layer) {
+                return feature.properties.layer == "commune";
+				},	
+			onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo + ' (' + feature.properties.codgeo + ')', {className: 'Tooltips', direction: "center", sticky:true});
+					layer.on('click', function(e) {
+						popupCOL(feature.properties);
+						selectProjets(feature.properties.échelon, feature.properties.codgeo);
+						geoSelect(e.target._latlngs);	
+						});	
+					}
+		});
+		
+		
+		
+/* FICHE TERRITOIRE */
+		
+		//Fonctions de formatage de nombres
+		function format1(nombre){ //2 chiffres après la virgule
+		  nombre=parseFloat(nombre).toFixed(2);
+		  return nombre;
+		}
+		function format2(nombre){ //séparateurs de milliers
+		  nombre=parseFloat(nombre).toFixed(0);
+		  nombre += '';
+		  var sep = '&nbsp;';
+		  var reg = /(\d+)(\d{3})/;
+		  while( reg.test( nombre)) {
+			nombre = nombre.replace( reg, '$1' +sep +'$2');
+		  }
+		  return nombre;
+		}
+		function format3(nombre){ // pas de chiffre après la virgule
+		  nombre=parseFloat(nombre).toFixed(0);
+		  return nombre;
+		}
+		
+		function format4(nombre){ // valeur absolue
+		  nombre=parseFloat(nombre).toFixed(2);
+		  return Math.abs(nombre);
+		}
+		
+		function format5(nombre){ // remplacer virgule par le point et donner le % avec 2 chiffres apres la virgule
+		  nombre = nombre.replace(',','.')
+		  nombre = nombre*100;
+		  nombre=parseFloat(nombre).toFixed(2);
+		  return nombre;
+		}
+
+		
+		//Création de la fiche récapitulative par département
+		function popupDEP(e) {
+			if (document.getElementById('sidebar').classList.contains('collapsed')){sidebar.open('home');}
+			masquerPanneaux();
+			document.getElementById('popupDEP').style.display = "block";
+			document.getElementById('tableDEP').style.display = "block";
+			//Remplissage de la popup
+			document.getElementById('NOMDEP').innerHTML = "<h1 style='color:#00414d'>"+e.libgeo+" ("+e.codgeo+")</h1>";
+			document.getElementById('LIEN').innerHTML = "<a href='maps/Dotations_investissement_departement_"+e.codgeo+".png' target=_blank >&rarr; Télécharger la carte pour le département</a>";
+			document.getElementById('POPDEP').innerHTML = "<span>"+format2(e.pop19)+" habitants</span>";
+			document.getElementById('DIDEP').innerHTML = "<span>"+format2(e.total_dotations)+"&nbsp;€</span>";
+			document.getElementById('DIHA').innerHTML = "<span>"+format2(e.total_dotation_hab)+"&nbsp;€</span>";
+			document.getElementById('NB_PROJETS').innerHTML = "<span>"+e.total_nb_projets+"</span>";
+		}
+		
+		//Création des fiches pour les collectivités
+		function popupCOL(e) {
+			if (document.getElementById('sidebar').classList.contains('collapsed')){sidebar.open('home');}
+			masquerPanneaux();
+			document.getElementById('popupCOL').style.display = "block";
+			//Remplissage de la popup
+			document.getElementById('NOMCOL').innerHTML = "<h1 style='color:#00414d'>"+e.libgeo+" ("+e.codgeo+")</h1>";
+			document.getElementById('POP19').innerHTML = "<span>"+format2(e.pop19)+" habitants</span>";
+			document.getElementById('DI_COL').innerHTML = "<span>"+format2(e.tot_sub)+"&nbsp;€</span>";
+			document.getElementById('DIHA_COL').innerHTML = "<span>"+format2(e.sub_hab)+"&nbsp;€</span>";
+			document.getElementById('NB_PROJETS_COL').innerHTML = "<span>"+e.nb_projets+"</span>";
+		}
+		
+		var extractTab = [];
+		//var listeProjets = new L.layerGroup();
+		function selectProjets(layer, id_terr){
+			extractTab.length = 0;
+			//listeProjets.clearLayers();
+			document.getElementById('LISTE_PROJETS').innerHTML = "<div class='divTableRow chiffre' id='LISTE_PROJETS'></div>"
+			layer = L.geoJSON(js_projets, {
+				filter: function(feature, layer) {return feature.properties.echelon == layer || feature.properties.id_terr == id_terr },
+				onEachFeature: function(feature, layer) {
+					extractTab.push([ [feature.properties.id_projet],[feature.properties.description],[feature.properties.dotation],[feature.properties.echelon],[feature.properties.categorie],[feature.properties.cout_total],[feature.properties.montant_sub],[feature.properties.pct_sub],[feature.properties.nom_terr],[feature.properties.pop19]]);
+					document.getElementById('LISTE_PROJETS').innerHTML += 
+						"<li onClick='ficheProjet(\""+feature.properties.id_projet+"\");'><a href='#'>"+feature.properties.description+"</a></li>";
+					//layer.addTo(listeProjets);
+					}
+				})
+		}
+		
+		function ficheProjet(e){
+			for (var i = 0; i < extractTab.length; i++) {
+				if(e == extractTab[i][0]){
+					document.getElementById('NOM_COL').innerHTML = "<span>"+extractTab[i][8]+"</span>";
+					//document.getElementById('ECHELON').innerHTML = "<span>Type de collectivité&nbsp;:"+extractTab[i][3]+"</span>";
+					document.getElementById('POPCOL19').innerHTML = "<span>"+format2(extractTab[i][9])+" habitants</span>";
+					document.getElementById('DESCRIPTION').innerHTML = "<span>"+extractTab[i][1]+"</span>";
+					document.getElementById('CATEGORIE').innerHTML = "<span>"+extractTab[i][4]+"</span>";
+					document.getElementById('DOTATION').innerHTML = "<span>"+extractTab[i][2]+"</span>";
+					document.getElementById('COUT').innerHTML = "<span>"+format2(extractTab[i][5])+"&nbsp;€</span>";
+					document.getElementById('SUBVENTION').innerHTML = "<span>"+format2(extractTab[i][6])+"&nbsp;€</span>";
+					document.getElementById('LEVIER').innerHTML = "<span>"+format1(extractTab[i][7])+"&nbsp;%</span>";
+				}
+			}
+			masquerPanneaux();
+			document.getElementById('popupPROJET').style.display = "block";
+		}
+	
+/* ACTIONS */
+		
+		function resetView() {
+			map.setView([46.5, -1.8], 6);		
+		}
+		
+		function resetMap () {
+			sidebar.open('home');
+			masquerPanneaux();
+			document.getElementById('accueil').style.display = "block";
+			document.getElementById('credits').style.display = "block";
+			if(selection) {map.removeLayer(selection);}
+			map.addLayer(departement);
+			map.removeLayer(cd);
+			map.removeLayer(com);
+			map.removeLayer(epci);
+			map.addLayer(legende);
+			map.removeLayer(legende_cd);
+			map.removeLayer(legende_com);
+			map.removeLayer(legende_epci);
+			}
+			
+		function retourAcceuil () {
+			resetView();
+			resetMap ();
+		}
+		
+		var panneaux = document.getElementsByClassName("panneau");
+		function masquerPanneaux() {
+			for (var i = 0; i < panneaux.length; i++) {
+				panneaux[i].style.display = "none";
+			}
+		}
+		
+		// Switch entre les onglets
+		function switchEPCI() {
+			masquerPanneaux();
+			document.getElementById('panneauEPCI').style.display = "block";
+			map.removeLayer(departement);
+			epci.addTo(map);
+			map.removeLayer(com);
+			map.removeLayer(cd);
+			map.addLayer(legende_epci);
+			map.removeLayer(legende_cd);
+			map.removeLayer(legende_com);
+			map.removeLayer(legende);
+			}
+		
+		function switchCD() {
+			masquerPanneaux(); 
+			document.getElementById('panneauCD').style.display = "block";
+			map.removeLayer(departement);
+			cd.addTo(map);
+			map.removeLayer(com);
+			map.removeLayer(epci);
+			map.addLayer(legende_cd);
+			map.removeLayer(legende);
+			map.removeLayer(legende_com);
+			map.removeLayer(legende_epci);
+			}
+			
+			
+		function switchCommunes() {
+			masquerPanneaux();
+			document.getElementById('panneauCommunes').style.display = "block";
+			map.removeLayer(departement);
+			com.addTo(map);
+			map.removeLayer(cd);
+			map.removeLayer(epci);
+			map.addLayer(legende_com);
+			map.removeLayer(legende_cd);
+			map.removeLayer(legende);
+			map.removeLayer(legende_epci);
+			}
+		
+		//Action au clic sur "home"
+		document.getElementById("logo").addEventListener("click", function(event){
+			event.stopPropagation();
+			retourAcceuil();
+		});
+
+		//Entourer territoire sélectionné
+		var selection; //lors d'un simple clic
+		function geoSelect(e) {
+			if(selection) {map.removeLayer(selection);}
+			selection = new L.polygon(e, {weight:3, color:"#e1ff2f",interactive: false, pane:'selection', fillOpacity: 0});
+			selection.addTo(map);
+		}
+		
+/* BARRES DE RECHERCHE */		
+		
+		//Barre de recherche n°1 (panneau latéral)
+		//var Recherche = L.layerGroup([projets1,projets2,projets3,projets4,projets5,projets6,projets7]);
+		
+		/*
+		var searchControl = new L.control.search({
+			layer: Contour_EPCICOM,
+			initial: false,
+			propertyName: "libgeo",
+			marker: false,
+			moveToLocation: function(latlng, title, map) {
+				map.setView(latlng, 10);
+			}
+		})
+		
+		searchControl.on('search:locationfound', function(e) {
+			if(markerCible) {map.removeLayer(markerCible);}
+			territoireCible(e.layer._latlngs);
+			creationProjets('tout');
+			departement.setStyle(style2);
+			map.removeLayer(legende);
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "none";
+			document.getElementById('filtres').style.display = "block";
+			document.getElementById('popupDEP').style.display = "none";
+		});
+		*/
+		
+		//map.addControl(searchControl);
+		
+		/*
+		//Déplacement du controle de recherche n°1
+		var htmlObject = searchControl.getContainer();
+		var a = document.getElementById('boiteRecherche');
+		function setParent(el, newParent)
+		{newParent.appendChild(el);}
+		setParent(htmlObject, a);
+		
+		//Barre de recherche n°2 (en haut à droite)
+		var searchControl2 = new L.control.search({
+			layer: Contour_EPCICOM,
+			initial: false,
+			position:'topright',
+			propertyName: 'libgeo',
+			collapsed: true,
+			marker: false,
+			moveToLocation: function(latlng, title, map) {
+				//var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+				map.setView(latlng, 10);
+			}
+		})
+		
+		searchControl2.on('search:locationfound', function(e) {
+			if(markerCible) {map.removeLayer(markerCible);}
+			territoireCible(e.layer._latlngs);
+			creationProjets('tout');
+			departement.setStyle(style2);
+			map.removeLayer(legende);
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "none";
+			document.getElementById('filtres').style.display = "block";
+			document.getElementById('popupDEP').style.display = "none";
+		});
+		*/
+		
+		//map.addControl(searchControl2);
+		
+		//map.removeLayer(vectorGridCom); 
+		//map.removeLayer(vectorGridEpci);
+		//map.removeLayer(Contour_EPCICOM);
+		
+		resetMap();
+		
+   </script>
+	
+</body>
+
+</html>
