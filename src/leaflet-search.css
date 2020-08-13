@@ -17,13 +17,11 @@
 .leaflet-control-search.search-exp {/*expanded*/
 	background: #fff;
 	border: 2px solid rgba(0,0,0,0.2);
-	background-clip: padding-box;
-	width:95%;	
+	background-clip: padding-box;	
 }
 .leaflet-control-search .search-input {
 	display:block;
 	float:left;
-	width:75%;
 	background: #fff;
 	border:1px solid #666;
 	border-radius:2px;
@@ -32,7 +30,7 @@
 	margin:4px 0 4px 4px;
 }
 .leaflet-control-search.search-load .search-input {
-	background: url('../img/loader.gif') no-repeat center right #fff;
+	background: url('../images/loader.gif') no-repeat center right #fff;
 }
 .leaflet-control-search.search-load .search-cancel {
 	visibility:hidden;
@@ -44,7 +42,7 @@
 	position:absolute;
 	right:28px;
 	margin:6px 0;
-	background: url('../img/search-icon.png') no-repeat 0 -46px;
+	background: url('../images/search-icon.png') no-repeat 0 -46px;
 	text-decoration:none;
 	filter: alpha(opacity=80);
 	opacity: 0.8;		
@@ -65,14 +63,14 @@
 }
 .leaflet-control-search .search-button {
 	display:block;
-	float:right;
+	float:left;
 	width:30px;
 	height:30px;	
-	background: url('../img/search-icon.png') no-repeat 4px 4px #fff;
+	background: url('../images/search-icon.png') no-repeat 4px 4px #fff;
 	border-radius:4px;
 }
 .leaflet-control-search .search-button:hover {
-	background: url('../img/search-icon.png') no-repeat 4px -20px #fafafa;
+	background: url('../images/search-icon.png') no-repeat 4px -20px #fafafa;
 }
 .leaflet-control-search .search-tooltip {
 	position:absolute;

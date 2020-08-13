@@ -23,6 +23,14 @@ a:hover {
   color : #ffee00;
 }
 
+.liste{
+	cursor: pointer;
+	list-style:square inside;
+	padding:4px 4px;
+	line-height:1.3em;	
+	font-size:0.9em;
+}
+
 i {
 	font-size:0.8em;
 	font-style: italic;	

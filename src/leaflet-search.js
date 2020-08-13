@@ -62,7 +62,7 @@ L.Control.Search = L.Control.extend({
 		//TODO implements uniq option 'sourceData' to recognizes source type: url,array,callback or layer				
 		jsonpParam: null,				//jsonp param name for search by jsonp service, ex: "callback"
 		propertyLoc: 'loc',				//field for remapping location, using array: ['latname','lonname'] for select double fields(ex. ['lat','lon'] ) support dotted format: 'prop.subprop.title'
-		propertyName: 'libgeo',			//property in marker.options(or feature.properties for vector layer) trough filter elements in layer,
+		propertyName: 'title',			//property in marker.options(or feature.properties for vector layer) trough filter elements in layer,
 		formatData: null,				//callback for reformat all data from source to indexed data object
 		filterData: null,				//callback for filtering data from text searched, params: textSearch, allRecords
 		moveToLocation: null,			//callback run on location found, params: latlng, title, map
@@ -78,12 +78,12 @@ L.Control.Search = L.Control.extend({
 		tipAutoSubmit: true,			//auto map panTo when click on tooltip
 		firstTipSubmit: false,			//auto select first result con enter click
 		autoResize: true,				//autoresize on input change
-		collapsed: false,				//collapse search control at startup
-		autoCollapse: true,			//collapse search control after submit(on button or on tips if enabled tipAutoSubmit)
+		collapsed: true,				//collapse search control at startup
+		autoCollapse: false,			//collapse search control after submit(on button or on tips if enabled tipAutoSubmit)
 		autoCollapseTime: 1200,			//delay for autoclosing alert and collapse after blur
-		textErr: 'Lieu non trouvé',	//error message
-		textCancel: 'Effacer',		    //title in cancel button		
-		textPlaceholder: '',   //placeholder value			
+		textErr: 'Location not found',	//error message
+		textCancel: 'Cancel',		    //title in cancel button		
+		textPlaceholder: 'Search...',   //placeholder value			
 		hideMarkerOnCollapse: false,    //remove circle and marker on search control collapsed		
 		position: 'topleft',		
 		marker: {						//custom L.Marker or false for hide
@@ -183,6 +183,11 @@ L.Control.Search = L.Control.extend({
 		// 		'layeradd': this._onLayerAddRemove,
 		// 		'layerremove': this._onLayerAddRemove
 		// 	}, this);
+		map.off({
+			// 		'layeradd': this._onLayerAddRemove,
+			// 		'layerremove': this._onLayerAddRemove
+			'resize': this._handleAutoresize
+			}, this);
 	},
 
 	// _onLayerAddRemove: function(e) {
@@ -298,7 +303,7 @@ L.Control.Search = L.Control.extend({
 		input.autocapitalize = 'off';
 		input.placeholder = text;
 		input.style.display = 'none';
-		input.role = 'Rechercher';
+		input.role = 'search';
 		input.id = input.role + input.type + input.size;
 		
 		label.htmlFor = input.id;
@@ -545,11 +550,11 @@ L.Control.Search = L.Control.extend({
         loc.layer = layer;
         retRecords[ self._getPath(layer.options,propName) ] = loc;
       }
-      else if(self._getPath(layer.properties,propName))
+      else if(self._getPath(layer.feature.properties,propName))
       {
         loc = layer.getLatLng();
         loc.layer = layer;
-        retRecords[ self._getPath(layer.properties,propName) ] = loc;
+        retRecords[ self._getPath(layer.feature.properties,propName) ] = loc;
       }
       else {
         //throw new Error("propertyName '"+propName+"' not found in marker"); 

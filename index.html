@@ -6,11 +6,10 @@
 	<!-- Développement : service cartographie ANCT -->
 
     <meta charset="utf-8" />
-    <title>DI</title>
+    <title>Dotations-2019</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="shortcut icon" type="image/png" href="img/picto_favicon.png"/>
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Marianne">
 	<link rel="stylesheet" href="src/leaflet-search.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" />
     <link rel="stylesheet" href="src/leaflet-sidebar.css" />
@@ -84,7 +83,7 @@
 						<div class="button_container">
 							<button class="bouton_accueil" onclick="switchEPCI();" title="Explorer les projets dans les intercommunalités"><img src="img/picto_onglet_off.png"/><div>Intercommunalités</div></button>
 							<button class="bouton_accueil" onclick="switchCommunes();" title="Explorer les projets dans les communes"><img src="img/picto_onglet_off.png"/><div>Communes</div></button>
-							<button class="bouton_accueil" onclick="retourAccueil;" title="Retourner à l'accueil"><img src="img/picto_onglet_off.png"/><div>Retour à l'accueil</div></button>
+							<button class="bouton_accueil" onclick="retourAccueil();" title="Retourner à l'accueil"><img src="img/picto_onglet_off.png"/><div>Retour à l'accueil</div></button>
 						</div>
 					</div>
 				</div>
@@ -102,7 +101,7 @@
 						<div class="button_container">
 							<button class="bouton_accueil" onclick="switchCommunes();" title="Explorer les projets dans les communes"><img src="img/picto_onglet_off.png"/><div>Communes</div></button>
 							<button class="bouton_accueil" onclick="switchCD();" title="Explorer les projets dans les conseils départementaux"><img src="img/picto_onglet_off.png"/><div>Conseils départementaux</div></button>
-							<button class="bouton_accueil" onclick="retourAccueil;" title="Retourner à l'accueil"><img src="img/picto_onglet_off.png"/><div>Retour à l'accueil</div></button>
+							<button class="bouton_accueil" onclick="retourAccueil();" title="Retourner à l'accueil"><img src="img/picto_onglet_off.png"/><div>Retour à l'accueil</div></button>
 						</div>
 					</div>
 				</div>
@@ -120,30 +119,13 @@
 						<div class="button_container">
 							<button class="bouton_accueil" onclick="switchEPCI();" title="Explorer les projets dans les intercommunalités"><img src="img/picto_onglet_off.png"/><div>Intercommunalités</div></button>
 							<button class="bouton_accueil" onclick="switchCD();" title="Explorer les projets dans les conseils départementaux"><img src="img/picto_onglet_off.png"/><div>Conseils départementaux</div></button>
-							<button class="bouton_accueil" onclick="retourAccueil;" title="Retourner à l'accueil"><img src="img/picto_onglet_off.png"/><div>Retour à l'accueil</div></button>
+							<button class="bouton_accueil" onclick="retourAccueil();" title="Retourner à l'accueil"><img src="img/picto_onglet_off.png"/><div>Retour à l'accueil</div></button>
 						</div>
 					</div>
 				</div>
 				
-				<div class="button_container, panneau" id="filtres">
-						<div class="bouton"><button class="bouton_off" onclick="creationProjets('tout');" title="toutes les catégories" id="CHECKtout" style="font-size:1em; padding-bottom:10px">Voir toutes les catégories</button></div>
-						<div class="bouton"><button class="bouton_off" onclick="creationProjets('1')" title="Santé, sanitaire et social" id="CHECK1"><img id="picto1" src="img/picto_on1.png" style="width:20px; padding-right:10px;" />Santé, sanitaire et social</button></div>
-						<div class="bouton"><button class="bouton_off" onclick="creationProjets('2')" title="Économie et emploi" id="CHECK2" ><img id="picto2" src="img/picto_on2.png" style="width:20px; padding-right:10px;" />Économie et emploi</button></div>
-						<div class="bouton"><button class="bouton_off" onclick="creationProjets('3')" title="Environnement, transition énergétique et écologie" id="CHECK3" ><img id="picto3" src="img/picto_on3.png" style="width:20px; padding-right:10px;" />Environnement, transition énergétique et écologie</button></div>
-						<div class="bouton"><button class="bouton_off" onclick="creationProjets('4')" title="Éducation" id="CHECK4" ><img id="picto4" src="img/picto_on4.png" style="width:20px; padding-right:10px;" />Éducation</button></div>
-						<div class="bouton"><button class="bouton_off" onclick="creationProjets('5')" title="Actions et Services publics" id="CHECK5" ><img id="picto5" src="img/picto_on5.png" style="width:20px; padding-right:10px;" />Actions et Services publics</button></div>
-						<div class="bouton"><button class="bouton_off" onclick="creationProjets('6')" title="Construction, habitat, urbanisme, transport et mise aux normes" id="CHECK6" ><img id="picto6" src="img/picto_on6.png" style="width:20px; padding-right:10px;" />Construction, habitat, urbanisme, patrimoine, transport</button></div>
-						<div class="bouton"><button class="bouton_off" onclick="creationProjets('7')" title="Contrat de ruralité" id="CHECK7" ><img id="picto7" src="img/picto_on7.png" style="width:20px; padding-right:10px;" />Contrat de ruralité</button></div><br/>
-						<div><span style="font-size:0.8em;"><i>Rechercher une commune ou intercommunalité bénéficiaire&nbsp;:</i></span></div>
-						<div id="boiteRecherche"></div>
-						<div class="button_container">
-							<button class="bouton_accueil" onclick="retourDepartements();" title="Départements"><img src="img/picto_onglet_off.png"/><div>Voir les départements</div></button>
-						</div>
-				</div>
-				
 				<!-- Contenu de la fiche récapitulative des départements -->
 				<div  class="panneau" id="popupDEP">
-					<h2>Cliquer sur un département pour voir les infos et télécharger la carte</h2>
 					
 					<div class="divTable" id="tableDEP">
 						<div class="divTableCell" >
@@ -165,7 +147,11 @@
 						<div class="divTableCell" >
 							<h3 class="divTableRow">Nombre total de projets financés via la DSIL, la DSID, la DETR et la dotation politique de la ville en 2019 dans le département&nbsp;:</h3>
 							<div class="divTableRow chiffre" id="NB_PROJETS"></div>
-						</div>	
+						</div>
+						<div class="divTableCell" >
+							<h3 class="divTableRow">Les projets subventionnés par la DSIL, la DETR et la DSID dans les conseils départementaux, les epci et les communes&nbsp;:</h3>
+							<div class="divTableRow" id="LISTE_PROJETS_DEP"></div>
+						</div>							
 					</div>
 				
 				</div>
@@ -194,8 +180,8 @@
 							<div class="divTableRow chiffre" id="DIHA_COL"></div>
 						</div>
 						<div class="divTableCell" >
-							<h3 class="divTableRow">Les projets subventionnés&nbsp;:</h3>
-							<div class="divTableRow chiffre" id="LISTE_PROJETS"></div>
+							<h3 class="divTableRow">Les projets subventionnés dans cette collectivité&nbsp;:</h3>
+							<div class="divTableRow" id="LISTE_PROJETS"></div>
 						</div>						
 					</div>
 				
@@ -228,6 +214,7 @@
 								<div class="divTableRow chiffre" id="LEVIER"></div>
 						</div>
 					</div>
+					<div class="retour bouton" onclick="retour();"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour à la liste de projets</div>
 				</div>
 					
             </div>
@@ -266,6 +253,7 @@
 		var sidebar = L.control.sidebar('sidebar').addTo(map);
 		sidebar.open('home');
 		
+		echelon = "";
 		
 /* COULEURS - STYLES - LEGENDE */
 		
@@ -406,7 +394,7 @@
 					layer.bindTooltip(feature.properties.libgeo + ' (' + feature.properties.codgeo + ')', {className: 'Tooltips', direction: "center", sticky:true});
 					layer.on('click', function(e) {
 						popupDEP(feature.properties);
-						selectProjets(feature.properties.échelon, feature.properties.codgeo);
+						selectProjets("departement", feature.properties.codgeo);
 						geoSelect(e.target._latlngs);	
 						});	
 					}
@@ -423,7 +411,7 @@
 					layer.bindTooltip(feature.properties.libgeo + ' (' + feature.properties.codgeo + ')', {className: 'Tooltips', direction: "center", sticky:true});
 					layer.on('click', function(e) {
 						popupCOL(feature.properties);
-						selectProjets(feature.properties.échelon, feature.properties.codgeo);
+						selectProjets(feature.properties.layer, feature.properties.codgeo);
 						geoSelect(e.target._latlngs);
 						});	
 					}
@@ -439,7 +427,7 @@
 					layer.bindTooltip(feature.properties.libgeo + ' (' + feature.properties.codgeo + ')', {className: 'Tooltips', direction: "center", sticky:true});
 					layer.on('click', function(e) {
 						popupCOL(feature.properties);
-						selectProjets(feature.properties.échelon, feature.properties.codgeo);
+						selectProjets(feature.properties.layer, feature.properties.codgeo);
 						geoSelect(e.target._latlngs);
 						});	
 					}
@@ -455,7 +443,7 @@
 					layer.bindTooltip(feature.properties.libgeo + ' (' + feature.properties.codgeo + ')', {className: 'Tooltips', direction: "center", sticky:true});
 					layer.on('click', function(e) {
 						popupCOL(feature.properties);
-						selectProjets(feature.properties.échelon, feature.properties.codgeo);
+						selectProjets(feature.properties.layer, feature.properties.codgeo);
 						geoSelect(e.target._latlngs);	
 						});	
 					}
@@ -465,7 +453,7 @@
 		
 /* FICHE TERRITOIRE */
 		
-		//Fonctions de formatage de nombres
+		//Fonctions de formatage de nombres et du texte
 		function format1(nombre){ //2 chiffres après la virgule
 		  nombre=parseFloat(nombre).toFixed(2);
 		  return nombre;
@@ -495,6 +483,11 @@
 		  nombre = nombre*100;
 		  nombre=parseFloat(nombre).toFixed(2);
 		  return nombre;
+		}
+		
+		function format6(texte){ // remplacer virgule par le point et donner le % avec 2 chiffres apres la virgule
+		  texte = (texte+'').charAt(0).toUpperCase()+texte.substr(1);
+		  return texte;
 		}
 
 		
@@ -527,20 +520,36 @@
 		}
 		
 		var extractTab = [];
-		//var listeProjets = new L.layerGroup();
 		function selectProjets(layer, id_terr){
 			extractTab.length = 0;
-			//listeProjets.clearLayers();
-			document.getElementById('LISTE_PROJETS').innerHTML = "<div class='divTableRow chiffre' id='LISTE_PROJETS'></div>"
-			layer = L.geoJSON(js_projets, {
-				filter: function(feature, layer) {return feature.properties.echelon == layer || feature.properties.id_terr == id_terr },
-				onEachFeature: function(feature, layer) {
-					extractTab.push([ [feature.properties.id_projet],[feature.properties.description],[feature.properties.dotation],[feature.properties.echelon],[feature.properties.categorie],[feature.properties.cout_total],[feature.properties.montant_sub],[feature.properties.pct_sub],[feature.properties.nom_terr],[feature.properties.pop19]]);
-					document.getElementById('LISTE_PROJETS').innerHTML += 
-						"<li onClick='ficheProjet(\""+feature.properties.id_projet+"\");'><a href='#'>"+feature.properties.description+"</a></li>";
-					//layer.addTo(listeProjets);
-					}
-				})
+			//Extraction des projets d'un département, tous niveaux de collectivité confondus
+			if(layer == "departement"){
+				document.getElementById('LISTE_PROJETS_DEP').innerHTML = "";
+				extract = L.geoJSON(js_projets, {
+					filter: function(feature, layer) {return feature.properties.id_dep == id_terr },
+					onEachFeature: function(feature, layer) {
+						extractTab.push([ [feature.properties.id_projet],[feature.properties.description],[feature.properties.dotation],[feature.properties.echelon],[feature.properties.categorie],[feature.properties.cout_total],[feature.properties.montant_sub],[feature.properties.pct_sub],[feature.properties.nom_terr],[feature.properties.pop19]]);
+						document.getElementById('LISTE_PROJETS_DEP').innerHTML += 
+							"<li class='liste' onClick='ficheProjet(\""+feature.properties.id_projet+"\");'><a href='#'>"+format6(feature.properties.description)+"</a></li>";
+						
+						}
+					})
+				
+			}
+			
+			//Extraction des projets dans un niveau de collectivite donné
+			else {
+				document.getElementById('LISTE_PROJETS').innerHTML = "";
+				extract = L.geoJSON(js_projets, {
+					filter: function(feature, layer) {return feature.properties.echelon == layer || feature.properties.id_terr == id_terr },
+					onEachFeature: function(feature, layer) {
+						extractTab.push([ [feature.properties.id_projet],[feature.properties.description],[feature.properties.dotation],[feature.properties.echelon],[feature.properties.categorie],[feature.properties.cout_total],[feature.properties.montant_sub],[feature.properties.pct_sub],[feature.properties.nom_terr],[feature.properties.pop19]]);
+						document.getElementById('LISTE_PROJETS').innerHTML += 
+							"<li class='liste' onClick='ficheProjet(\""+feature.properties.id_projet+"\");'><a href='#'>"+format6(feature.properties.description)+"</a></li>";
+						}
+					})
+			}	
+	
 		}
 		
 		function ficheProjet(e){
@@ -569,6 +578,7 @@
 		
 		function resetMap () {
 			sidebar.open('home');
+			echelon = "departement";
 			masquerPanneaux();
 			document.getElementById('accueil').style.display = "block";
 			document.getElementById('credits').style.display = "block";
@@ -583,7 +593,7 @@
 			map.removeLayer(legende_epci);
 			}
 			
-		function retourAcceuil () {
+		function retourAccueil () {
 			resetView();
 			resetMap ();
 		}
@@ -597,7 +607,9 @@
 		
 		// Switch entre les onglets
 		function switchEPCI() {
+			echelon = "epci";
 			masquerPanneaux();
+			if(selection) {map.removeLayer(selection);}
 			document.getElementById('panneauEPCI').style.display = "block";
 			map.removeLayer(departement);
 			epci.addTo(map);
@@ -610,7 +622,9 @@
 			}
 		
 		function switchCD() {
+			echelon = "cd";
 			masquerPanneaux(); 
+			if(selection) {map.removeLayer(selection);}
 			document.getElementById('panneauCD').style.display = "block";
 			map.removeLayer(departement);
 			cd.addTo(map);
@@ -624,7 +638,9 @@
 			
 			
 		function switchCommunes() {
+			echelon = "commune";
 			masquerPanneaux();
+			if(selection) {map.removeLayer(selection);}
 			document.getElementById('panneauCommunes').style.display = "block";
 			map.removeLayer(departement);
 			com.addTo(map);
@@ -639,7 +655,7 @@
 		//Action au clic sur "home"
 		document.getElementById("logo").addEventListener("click", function(event){
 			event.stopPropagation();
-			retourAcceuil();
+			retourAccueil();
 		});
 
 		//Entourer territoire sélectionné
@@ -650,48 +666,27 @@
 			selection.addTo(map);
 		}
 		
+		//Action au clic sur la carte
+		map.on('click', function(e) { 
+			//event.stopPropagation();
+			//if(selection) {map.removeLayer(selection);}
+			//e.preventDefault();
+			});
+			
+		//Action de retour à la fiche de la collectivité
+		function retour() {
+			masquerPanneaux();
+			if (echelon=="departement"){document.getElementById('popupDEP').style.display = "block";}
+			else{document.getElementById('popupCOL').style.display = "block";}
+			}
+		
 /* BARRES DE RECHERCHE */		
 		
-		//Barre de recherche n°1 (panneau latéral)
-		//var Recherche = L.layerGroup([projets1,projets2,projets3,projets4,projets5,projets6,projets7]);
-		
-		/*
-		var searchControl = new L.control.search({
-			layer: Contour_EPCICOM,
-			initial: false,
-			propertyName: "libgeo",
-			marker: false,
-			moveToLocation: function(latlng, title, map) {
-				map.setView(latlng, 10);
-			}
-		})
-		
-		searchControl.on('search:locationfound', function(e) {
-			if(markerCible) {map.removeLayer(markerCible);}
-			territoireCible(e.layer._latlngs);
-			creationProjets('tout');
-			departement.setStyle(style2);
-			map.removeLayer(legende);
-			document.getElementById('popup').style.display = "none";
-			document.getElementById('defaut').style.display = "none";
-			document.getElementById('filtres').style.display = "block";
-			document.getElementById('popupDEP').style.display = "none";
-		});
-		*/
-		
-		//map.addControl(searchControl);
-		
-		/*
-		//Déplacement du controle de recherche n°1
-		var htmlObject = searchControl.getContainer();
-		var a = document.getElementById('boiteRecherche');
-		function setParent(el, newParent)
-		{newParent.appendChild(el);}
-		setParent(htmlObject, a);
+		var Recherche = L.layerGroup([com,epci,cd]);
 		
 		//Barre de recherche n°2 (en haut à droite)
-		var searchControl2 = new L.control.search({
-			layer: Contour_EPCICOM,
+		var searchControl = new L.control.search({
+			layer: Recherche,
 			initial: false,
 			position:'topright',
 			propertyName: 'libgeo',
@@ -699,28 +694,20 @@
 			marker: false,
 			moveToLocation: function(latlng, title, map) {
 				//var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-				map.setView(latlng, 10);
+				map.setView(latlng, 8);
 			}
 		})
 		
-		searchControl2.on('search:locationfound', function(e) {
-			if(markerCible) {map.removeLayer(markerCible);}
-			territoireCible(e.layer._latlngs);
-			creationProjets('tout');
-			departement.setStyle(style2);
-			map.removeLayer(legende);
-			document.getElementById('popup').style.display = "none";
-			document.getElementById('defaut').style.display = "none";
-			document.getElementById('filtres').style.display = "block";
-			document.getElementById('popupDEP').style.display = "none";
+		searchControl.on('search:locationfound', function(e) {
+			if(e.layer.feature.properties.layer == "conseil_departemental"){switchCD();}
+			else if(e.layer.feature.properties.layer == "epci"){switchEPCI();}
+			else {switchCommunes();}
+			geoSelect(e.layer._latlngs);
+			popupCOL(e.layer.feature.properties);
+			selectProjets(e.layer.feature.properties.layer, e.layer.feature.properties.codgeo);
 		});
-		*/
 		
-		//map.addControl(searchControl2);
-		
-		//map.removeLayer(vectorGridCom); 
-		//map.removeLayer(vectorGridEpci);
-		//map.removeLayer(Contour_EPCICOM);
+		map.addControl(searchControl);
 		
 		resetMap();
 		
