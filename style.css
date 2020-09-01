@@ -197,7 +197,7 @@ button {
 .bouton_retour{
 		background-image: url("img/picto_fleche_off.png");
 		background-repeat:no-repeat;
-		background-position:left top;
+		background-position:left center;
 		background-origin:content-box;
 		background-color: #206a75;
 		opacity:0.8;
@@ -207,7 +207,7 @@ button {
 		border-radius: 4px;
 		cursor:pointer;
 		display: inline-block;
-		padding:4px;
+		padding:5px;
 		font-size:0.8em;
 		}	
 
