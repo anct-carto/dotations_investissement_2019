@@ -5,7 +5,7 @@ body {
 
 html, body, #mapid {
     height: 100%;
-	font-family: 'Marianne', serif;
+	font-family: 'marianneregular', serif;
 	color: #00414d;
 	}
 	
@@ -197,7 +197,6 @@ button {
 		background-image: url("img/picto_fleche_off.png");
 		background-repeat:no-repeat;
 		background-position:left top;
-		background-origin: content-box;
 		background-color: #206a75;
 		opacity:0.8;
 		width:50%;
