@@ -5,7 +5,7 @@ body {
 
 html, body, #mapid {
     height: 100%;
-	font-family: 'marianneregular', serif;
+	font-family: 'mariannemedium', serif;
 	color: #00414d;
 	}
 	
@@ -30,6 +30,7 @@ i {
 strong {
 	color: white;
 	font-weight: normal;
+	font-family: 'mariannebold', serif;
 	}
 	
 span {
