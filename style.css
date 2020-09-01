@@ -12,24 +12,15 @@ html, body, #mapid {
 a {
 	text-decoration:none;
 	color: white;
-	
-	}
-
-p{
-	font-size:0.9em;	
 	}
 
 a:hover {
   color : #ffee00;
 }
 
-.liste{
-	cursor: pointer;
-	list-style:square inside;
-	padding:4px 4px;
-	line-height:1.3em;	
-	font-size:0.9em;
-}
+p{
+	font-size:0.9em;	
+	}
 
 i {
 	font-size:0.8em;
@@ -37,7 +28,8 @@ i {
 	}
 	
 strong {
-	font-weight: bold;
+	color: white;
+	font-weight: normal;
 	}
 	
 span {
@@ -46,9 +38,17 @@ span {
 }
 		
 h1{
-	font-size:1.5em;
+	font-size:1.6em;
 	text-transform:uppercase;
-	color: white;
+	color: #00414d;
+	padding:5px;
+	border-left:5px solid #ffee00;
+	}
+	
+h4{
+	font-size:1.3em;
+	text-transform:uppercase;
+	color: #00414d;
 	}
 	
 h2{
@@ -62,19 +62,15 @@ h3{
 	font-weight: bold;
 	color: #00414d;
 }
+
+button {
+	vertical-align: middle;	
+	background-color: transparent;
+	}
 	
 .leaflet-left {
 	left: 0;
 	}	
-	
-.fas {
-  color : white;
-}
-	
-#sources {
-	margin-top:50px;
-	font-size:0.8em;
-	}
 
 .Tooltips {
 	font-size:1.1em;
@@ -85,26 +81,15 @@ h3{
 	background-color: white;	
 	margin: -20px 0px;
 	}
-	
-.epci_Tooltips {
-	font-size:1em;
-	padding:5px;
-	border:none;
-	color: red;
-	background-color: rgba(255, 255, 255, 0.6);
-	box-shadow: none;
-	border: none;
-	}
 
-.bas {
-	margin-top:50px;
+.liste{
+	cursor: pointer;
+	list-style:square inside;
+	padding:4px 4px;
+	line-height:1.3em;	
+	font-size:0.9em;
 }
 
-#boiteRecherche{
-	margin-bottom:40px;
-}
-	
-	
 	/*Affichage des onglets*/	
 
 .panneau {
@@ -119,7 +104,6 @@ h3{
 	display: block;
 }
 		
-
 
 #logo_dep:hover {
 	background-image: url("img/picto_deptaboff.png");
@@ -157,159 +141,81 @@ h3{
 	background-position:center center;
 }
 	
-.onglets{
+.onglet_off{
 	background-color: #00414d;
-	border: 0.1px solid #5a77b7;
-	
+	border: 0.1px solid #206a75;	
 }
 
-.onglets img{
+.onglet_off img{
 	vertical-align:middle;
 	padding:7px;
 }
 
-#filtre {
-	background-image: url("img/picto_points_off.png");
-	background-repeat: no-repeat;
-	background-size: 18px;
-	background-position: center;
-	}
-	
-#filtre:hover {
-	background-image: url("img/picto_points_on.png");
-	background-repeat: no-repeat;
-	background-size: 18px;
-	background-position: center;
-	}
-
-#departements {
-	background-image: url("img/picto_onglet_off.png");
-	background-repeat: no-repeat;
-	background-size: 18px;
-	background-position: center;
-	}
-	
-#departements:hover {	
-	background-image: url("img/picto_onglet_on.png");
-	background-repeat: no-repeat;
-	background-size: 18px;
-	background-position: center;
-	}		
-
-.onglets:hover {
+.onglet_off:hover {
 	color: #004494;
 	background-color: #e1ff2f;
 }
 
-.onglets_on a{
-	background-color: #f26664;
-	border : 0.1px solid #5a77b7;
+.onglet_on{
+	background-color: #e65f5c;
+	border: 0.1px solid #206a75;
 }
-
-.bouton_min_off {
-		background-color: transparent;
-		border: 0.2px;
-		cursor:pointer;
-		padding:10px;
-		vertical-align: middle;
-		text-align: center;
-		}
-
-.bouton_min_on {
-		background-color: #206a75;
-		border-radius: 4px;
-		border: 0.2px;
-		cursor:pointer;
-		padding:10px;
-		vertical-align: middle;
-		text-align: center;
-		}
-
-.tip {
-	position:absolute;
-	margin-top:5px;
-	background-color: #e1ff2f;
-	border-radius: 4px;
-	font-size:0.8em;
-	padding:4px;
-	left: 5%;
-	opacity: 0;
-	transition: opacity 0.2s;
-}
-		
-.bouton_off {
-		color: #00414d;
-		font-weight: bold;
-		background-color: transparent;
-		border: none;
-		cursor:pointer;
-		padding:3px;
-		margin: 1px;
-		vertical-align: middle;
-		text-align: left;
-		}
-		
-.bouton:hover {
-		background-color: #e1ff2f;
-		border-radius: 4px;
-		}
-		
-
-.bouton_on {
-		color: white;
-		font-weight: bold;
-		background-color: transparent;
-		border: none;
-		cursor:pointer;
-		padding:3px;
-		margin: 1px;
-		vertical-align: middle;
-		text-align: left;
-		}
-
-#retourDEP {
-		cursor:pointer;	
-		margin-top:15px;
-		}
-		
-#retourCategories {
-		cursor:pointer;	
-		margin-top:15px;
-		}
-
-button {
-	vertical-align: middle;	
-	background-color: transparent;
-	}	
 
 .button_container {
-	margin-top:15px;
+	margin-top:35px;
+	margin-bottom:20px;
 	}
 	
 .bouton_accueil {
+	background-image: url("img/picto_onglet_off.png");
+	background-repeat:no-repeat;
+	background-position:left top;
+	background-origin: content-box;
 	background-color: #206a75;
 	opacity:0.8;
-	width:30%;
+	width:32%;
+	height: 50px;
 	color: white;
 	font-weight: bold;
 	border-radius: 4px;
 	cursor:pointer;
 	display: inline-block;
 	padding:4px;
-	font-size:0.9em;
+	font-size:0.8em;
 }
 
-.bouton_accueil img {
-	width:15px;
-	padding:2px;
-}
+
 
 .bouton_accueil:hover {
 		background-color: #e1ff2f;
 		border-radius: 4px;
 		color: #00414d;
+		background-image: url("img/picto_onglet_on.png");
 		}
 
+.bouton_retour{
+		background-image: url("img/picto_fleche_off.png");
+		background-repeat:no-repeat;
+		background-position:left top;
+		background-origin: content-box;
+		background-color: #206a75;
+		opacity:0.8;
+		width:50%;
+		color: white;
+		font-weight: bold;
+		border-radius: 4px;
+		cursor:pointer;
+		display: inline-block;
+		padding:4px;
+		font-size:0.8em;
+		}	
+
+.bouton_retour:hover {
+		background-image: url("img/picto_fleche_on.png");
+		background-color: #e1ff2f;
+		border-radius: 4px;
+		color: #00414d;
+		}
 
 /*Style du tableau*/
 	
@@ -317,7 +223,6 @@ button {
 	display: table;
 	
 }
-
 
 .divTableRow {
 	display: table-row;	
@@ -339,30 +244,7 @@ button {
 	color:#f26664;
 }
 
-.ptichiffre{
-	font-size:0.8em;
-	font-weight: bold;
-	color:#f26664;
-}
-
-.description {
-	font-size:0.8em;
-	font-weight: bold;
-	color:#ffffff;
-}
-
-.mycluster {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    background-color: #3498db;
-    color: white;
-    text-align: center;
-    font-size: 20px;    
-    line-height: 40px;
-    margin-top: -20px;
-    margin-left: -20px;
-}
+/*Style des typo*/
 
 .labelClassReg {
 	line-height:9px;	

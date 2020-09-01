@@ -1,5 +1,3 @@
-##Carte en cours de développement
-
 #Carte interactive des dotations d'investissement dévolues aux collectivités en 2019
 	
 [Lien d'accès à la carte](https://anct-carto.github.io/dotations_investissement_2019) : https://anct-carto.github.io/dotations_investissement_2019
