@@ -104,7 +104,15 @@ button {
 .credits {
 	display: block;
 }
-		
+
+#boiteRecherche{
+	position:absolute;
+	display:none;
+	left:auto;
+	top: auto;
+	padding:2px;
+	z-index: 1200;
+}	
 
 #logo_dep:hover {
 	background-image: url("img/picto_deptaboff.png");

@@ -81,9 +81,9 @@ L.Control.Search = L.Control.extend({
 		collapsed: true,				//collapse search control at startup
 		autoCollapse: false,			//collapse search control after submit(on button or on tips if enabled tipAutoSubmit)
 		autoCollapseTime: 1200,			//delay for autoclosing alert and collapse after blur
-		textErr: 'Collectivite non trouvee',	//error message
+		textErr: 'Pas de resultat',	//error message
 		textCancel: 'Annuler',		    //title in cancel button		
-		textPlaceholder: 'Rechercher...',   //placeholder value			
+		textPlaceholder: 'Rechercher un territoire',   //placeholder value			
 		hideMarkerOnCollapse: false,    //remove circle and marker on search control collapsed		
 		position: 'topleft',		
 		marker: {						//custom L.Marker or false for hide

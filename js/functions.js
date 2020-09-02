@@ -401,7 +401,7 @@
 		
 		var Recherche = L.layerGroup([com,epci,cd]);
 		
-		//Barre de recherche n°2 (en haut à droite)
+		//Barre de recherche
 		var searchControl = new L.control.search({
 			layer: Recherche,
 			initial: false,
@@ -425,6 +425,13 @@
 		});
 		
 		map.addControl(searchControl);
+		
+		//Déplacement du controle de recherche dans la barre verticale du panneau latéral
+		var htmlObject = searchControl.getContainer();
+		var a = document.getElementById('boiteRecherche');
+		function setParent(el, newParent)
+		{newParent.appendChild(el);}
+		setParent(htmlObject, a);
 	
 	resetMap();
 
